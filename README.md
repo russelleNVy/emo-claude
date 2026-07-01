@@ -53,14 +53,22 @@ updates** — unlike anything that edits the app itself.
 
 ### Where it works
 
-- ✅ **Claude Code terminal CLI** — macOS, Linux, and Windows. This is the
-  confirmed surface (the emo gerunds are Claude Code's terminal "thinking" spinner).
-- ❌ **The standalone Claude desktop chat app** (claude.ai / the "Claude" app) —
-  a **separate product** that doesn't read `~/.claude/settings.json`, so this
-  won't change its loading indicator.
-- ❓ **Claude Code's IDE extensions / other GUI surfaces** — they read the same
-  `settings.json`, but whether they render the rotating gerund spinner isn't
-  guaranteed. Terminal is the sure thing.
+- ✅ **Claude Code terminal CLI** (`claude` in Terminal / iTerm) — macOS, Linux,
+  and Windows. This is the confirmed surface: the emo gerunds *are* Claude Code's
+  terminal "thinking" spinner.
+- ❌ **The "Claude" desktop app** (`~/Library/Application Support/Claude/`) —
+  confirmed no effect. Even though it can run Claude Code sessions through the
+  Agent SDK, its loading/status indicator is the **app's own custom UI
+  component**, not the terminal spinner that reads `spinnerVerbs` — and it keeps
+  a separate `config.json`. So the setting is correctly installed but simply
+  isn't what draws that indicator.
+- ❌ **IDE extensions / other GUI surfaces** — same reason: they don't render the
+  terminal gerund spinner, so there's nothing for the setting to swap. (If you
+  ever *do* see gerunds like *Puzzling…* in one, EMO-Claude would apply there
+  too — but the terminal is the sure thing.)
+
+**TL;DR:** run `claude` in a real terminal to see it. GUI surfaces draw their own
+status UI and won't show the emo verbs.
 
 ---
 
