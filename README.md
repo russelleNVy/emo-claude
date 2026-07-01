@@ -14,6 +14,12 @@ Instead of watching Claude *Frolicking…* or *Percolating…*, watch it
 &nbsp;![Claude Code](https://img.shields.io/badge/Claude_Code-v2.x-1a1a1a?style=flat-square)
 &nbsp;![stay sad · ship code](https://img.shields.io/badge/stay_sad-ship_code-ff2d78?style=flat-square)
 
+<p></p>
+
+<a href="https://russellenvy.github.io/emo-claude/"><b>russellenvy.github.io/emo-claude</b></a>
+
+<p>By <a href="https://russellenvy.com">RUSSΞLL AARØN</a></p>
+
 </div>
 
 ---
