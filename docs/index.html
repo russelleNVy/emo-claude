@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EMO-Claude — turn Claude Code's spinner into an emo setlist</title>
+<meta name="description" content="Turn Claude Code's 'thinking' spinner into a mid-2000s emo setlist. Band names, song titles, and albums bent into gerunds — installed via the spinnerVerbs setting.">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%96%A4%3C/text%3E%3C/svg%3E">
+
+<!-- social / link unfurl -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="EMO-Claude">
+<meta property="og:description" content="Turn Claude Code's spinner into a mid-2000s emo setlist. Stay sad, ship code.">
+<meta property="og:image" content="assets/hero-1544x500.png">
+<meta property="og:url" content="https://russellenvy.github.io/emo-claude/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Rock+Salt&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0c;--panel:#111116;--line:#23232b;
+    --crimson:#e10f1f;--crimson-soft:#ff2e3e;--pink:#ff2d78;
+    --ink:#f4f4f6;--muted:#9a9aa4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--crimson-soft);text-decoration:none}
+  a:hover{color:var(--pink)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .dots-bg{position:fixed;inset:0;z-index:-1;opacity:.04;
+    background-image:radial-gradient(rgba(255,255,255,.9) 1px, transparent 1.4px);background-size:24px 24px}
+  .glow-bg{position:fixed;top:-10%;left:50%;transform:translateX(-50%);z-index:-1;
+    width:120%;height:70%;
+    background:radial-gradient(45% 55% at 50% 40%, rgba(225,15,31,.16), rgba(225,15,31,0) 70%)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(10,10,12,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mark{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em;display:flex;align-items:center;gap:.32em}
+  .mark .h{color:var(--crimson)}
+  .navlinks{display:flex;gap:26px;align-items:center;font-size:14px;font-weight:600}
+  .navlinks a{color:var(--muted)}.navlinks a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-weight:700;border-radius:999px;
+    padding:11px 22px;font-size:15px;transition:.15s;border:1px solid transparent;cursor:pointer}
+  .btn-primary{background:var(--crimson);color:#fff}
+  .btn-primary:hover{background:var(--crimson-soft);color:#fff}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,.02)}
+  .btn-ghost:hover{border-color:var(--crimson);color:#fff}
+
+  /* hero */
+  header.hero{padding:76px 0 40px;text-align:center}
+  .kicker{font-weight:700;letter-spacing:.34em;text-transform:uppercase;font-size:13px;
+    color:var(--crimson-soft);display:inline-flex;gap:1em;align-items:center}
+  .kicker::before,.kicker::after{content:"✦";color:var(--pink)}
+  h1.title{font-family:'Bebas Neue',sans-serif;line-height:.82;letter-spacing:.02em;
+    font-size:clamp(72px,15vw,168px);margin:18px 0 6px;
+    filter:drop-shadow(0 0 26px rgba(225,15,31,.35));display:flex;justify-content:center;align-items:center;gap:.14em;flex-wrap:wrap}
+  h1.title .emo{color:var(--ink)}
+  h1.title .heart{color:var(--crimson);font-size:.62em;filter:drop-shadow(0 0 14px rgba(225,15,31,.6))}
+  h1.title .claude{color:var(--crimson)}
+  .drip{width:min(380px,70%);height:22px;margin:0 auto 20px}
+  .lead{font-size:clamp(18px,2.4vw,23px);color:#e2e2e6;font-weight:600;max-width:640px;margin:0 auto}
+  .lead b{color:var(--pink)}
+  .cta{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+
+  /* terminal demo */
+  .term{max-width:600px;margin:40px auto 0;background:#08080a;border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(225,15,31,.06)}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#0d0d11}
+  .term-bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .term-bar .r{background:#ff5f57}.term-bar .y{background:#febc2e}.term-bar .g{background:#28c840}
+  .term-bar span{margin-left:8px;color:var(--muted);font:500 12px 'JetBrains Mono',monospace}
+  .term-body{padding:22px 20px;font:500 16px/1.8 'JetBrains Mono',monospace;text-align:left;min-height:96px}
+  .term-body .prompt{color:var(--muted)}
+  .term-body .spin{color:var(--crimson-soft)}
+  #verb{color:var(--ink)}
+  .cursor{display:inline-block;width:9px;height:18px;background:var(--crimson);vertical-align:-3px;
+    margin-left:4px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* sections */
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);letter-spacing:.03em;
+    text-align:center;margin-bottom:8px}
+  h2 .h{color:var(--crimson)}
+  .sub{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 40px}
+
+  .mascot{display:block;max-width:560px;width:92%;margin:8px auto 0;border-radius:14px;
+    border:1px solid var(--line);box-shadow:0 24px 70px rgba(0,0,0,.55)}
+  .caption{text-align:center;color:var(--muted);font-style:italic;margin-top:14px;font-size:15px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .card h3{font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:.5em}
+  .card p{color:var(--muted);font-size:15px}
+  .card .ic{color:var(--crimson-soft)}
+
+  pre{background:#08080a;border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+    overflow-x:auto;font:500 14px/1.7 'JetBrains Mono',monospace;color:#e7e7ea;margin:14px 0}
+  pre .c{color:var(--muted)}
+  pre .k{color:var(--crimson-soft)}
+
+  .setlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+  .verb{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+    font:500 15px 'JetBrains Mono',monospace;display:flex;align-items:center;gap:.7em}
+  .verb .d{color:var(--crimson);flex:0 0 auto}
+  .verb small{color:var(--muted);font-family:'Inter';margin-left:auto;font-size:12px;text-align:right}
+
+  .note{background:rgba(225,15,31,.06);border:1px solid rgba(225,15,31,.28);border-radius:12px;
+    padding:16px 20px;color:#e6d3d4;font-size:14.5px;margin-top:22px}
+  .note b{color:var(--crimson-soft)}
+
+  footer{padding:56px 0 70px;text-align:center;border-top:1px solid var(--line)}
+  footer .byline{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.06em;margin-top:8px}
+  footer .scrawl{font-family:'Rock Salt',cursive;color:var(--pink);font-size:14px;margin-top:20px;opacity:.9}
+  footer .muted{color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="dots-bg"></div>
+<div class="glow-bg"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="mark">EMO <span class="h">♥</span> CLAUDE</div>
+    <div class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#install">Install</a>
+      <a href="#setlist">Setlist</a>
+      <a class="btn btn-ghost" href="https://github.com/russelleNVy/emo-claude">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Spinner Verb Pack for Claude Code</div>
+    <h1 class="title"><span class="emo">EMO</span><span class="heart">♥</span><span class="claude">CLAUDE</span></h1>
+    <svg class="drip" viewBox="0 0 380 22" preserveAspectRatio="none" fill="#e10f1f">
+      <rect x="0" y="0" width="380" height="6"/>
+      <path d="M50 6 q5 0 5 9 l0 5 q0 4 -5 4 q-5 0 -5 -4 l0 -5 q0 -9 5 -9z"/>
+      <path d="M150 6 q6 0 6 12 l0 6 q0 4 -6 4 q-6 0 -6 -4 l0 -6 q0 -12 6 -12z"/>
+      <path d="M250 6 q4 0 4 8 l0 3 q0 4 -4 4 q-4 0 -4 -4 l0 -3 q0 -8 4 -8z"/>
+      <path d="M330 6 q5 0 5 11 l0 5 q0 4 -5 4 q-5 0 -5 -4 l0 -5 q0 -11 5 -11z"/>
+    </svg>
+    <p class="lead">Turn Claude Code's "thinking" spinner into a mid-2000s <b>emo setlist</b>. Real band names, song titles, and albums — bent into gerunds.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#install">🖤 Install it</a>
+      <a class="btn btn-ghost" href="https://github.com/russelleNVy/emo-claude">View on GitHub</a>
+    </div>
+
+    <div class="term" aria-hidden="true">
+      <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>claude — zsh</span></div>
+      <div class="term-body">
+        <div class="prompt">$ claude</div>
+        <div><span class="spin">◍</span> <span id="verb">Chemicalling My Romance</span>…<span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="mascot" style="border-top:none">
+  <div class="wrap">
+    <img class="mascot" src="assets/emo-claude-face.png" alt="The EMO-Claude mascot — an emo cyborg">
+    <p class="caption">your new spinner — feeling everything, shipping anyway.</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>How it <span class="h">works</span></h2>
+    <p class="sub">No binary patching, no wrappers — just a supported key in your Claude Code settings.</p>
+    <div class="cards">
+      <div class="card"><h3><span class="ic">◆</span> One config key</h3><p>It's just <code>spinnerVerbs</code> in <code>~/.claude/settings.json</code>. Append to the defaults, or replace them entirely.</p></div>
+      <div class="card"><h3><span class="ic">◆</span> Survives updates</h3><p>It lives in your home-directory config, not the app — so a Claude Code update won't wipe it.</p></div>
+      <div class="card"><h3><span class="ic">◆</span> Terminal spinner</h3><p>The emo gerunds are Claude Code's terminal "thinking" spinner. Run <code>claude</code> in a real terminal to see them.</p></div>
+    </div>
+    <pre><span class="c">// ~/.claude/settings.json</span>
+{
+  <span class="k">"spinnerVerbs"</span>: {
+    <span class="k">"mode"</span>: <span class="k">"append"</span>,
+    <span class="k">"verbs"</span>: [<span class="k">"Chemicalling My Romance"</span>, <span class="k">"Escaping My Fate"</span>, ...]
+  }
+}</pre>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2>Install</h2>
+    <p class="sub">macOS &amp; Linux get a one-liner. Windows &amp; everyone else can edit the file directly.</p>
+    <div class="cards" style="grid-template-columns:1fr">
+      <div class="card">
+        <h3>Option A — one command <small style="color:var(--muted);font-weight:400">(macOS / Linux)</small></h3>
+<pre>git clone https://github.com/russelleNVy/emo-claude.git
+cd emo-claude
+./install.sh              <span class="c"># append to the defaults</span>
+./install.sh --replace    <span class="c"># emo verbs only</span></pre>
+      </div>
+      <div class="card">
+        <h3>Option B — let Claude do it</h3>
+        <p>Paste into Claude Code: <em>"Add the verbs from <code>verbs.json</code> to my <code>~/.claude/settings.json</code> under <code>spinnerVerbs</code> with <code>mode: append</code>."</em></p>
+      </div>
+      <div class="card">
+        <h3>Option C — by hand <small style="color:var(--muted);font-weight:400">(any OS, incl. Windows)</small></h3>
+        <p>Copy the array from <a href="https://github.com/russelleNVy/emo-claude/blob/main/verbs.json">verbs.json</a> into your settings file: <code>~/.claude/settings.json</code> (macOS/Linux) or <code>%USERPROFILE%\.claude\settings.json</code> (Windows).</p>
+      </div>
+    </div>
+    <div class="note"><b>Where it works:</b> the Claude Code <b>terminal CLI</b> (macOS / Linux / Windows). It does <b>not</b> change the standalone Claude desktop app — that draws its own status UI and doesn't read <code>spinnerVerbs</code>.</div>
+  </div>
+</section>
+
+<section id="setlist">
+  <div class="wrap">
+    <h2>The <span class="h">setlist</span></h2>
+    <p class="sub">A taste — band names, song titles, and albums, all bent into gerunds. <a href="https://github.com/russelleNVy/emo-claude/blob/main/verbs.json">See the full list →</a></p>
+    <div class="setlist" id="setlist"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="mark" style="justify-content:center;font-size:34px">EMO <span class="h" style="color:var(--crimson)">♥</span> CLAUDE</div>
+    <p class="muted" style="margin-top:10px"><a href="https://github.com/russelleNVy/emo-claude">github.com/russelleNVy/emo-claude</a> · MIT</p>
+    <div class="byline">By <a href="https://russellenvy.com">RUSSΞLL AARØN</a></div>
+    <div class="scrawl">stay sad · ship code 🖤</div>
+  </div>
+</footer>
+
+<script>
+  // rotating spinner demo
+  const demo = ["Chemicalling My Romance","Marching in the Black Parade","Making Damn Sure",
+    "Escaping My Fate","Piercing the Veil","Writing Sins, Not Tragedies","Bleeding American",
+    "Doing Misery Business","Kinging for a Day","Setting Alexis on Fire","Sweating Out the Fever",
+    "Falling in Reverse","Cabbing for Cutie","Chasing Safety","Loving in Ohio","Counting Me In",
+    "Cruising Ocean Avenue","Going Down Swinging","Slaying the King","Opening Brand New Eyes"];
+  const vEl = document.getElementById('verb');
+  let vi = 0;
+  setInterval(() => {
+    vi = (vi + 1) % demo.length;
+    vEl.style.opacity = 0;
+    setTimeout(() => { vEl.textContent = demo[vi]; vEl.style.opacity = 1; }, 180);
+  }, 1700);
+  vEl.style.transition = 'opacity .18s';
+
+  // setlist grid
+  const setlist = [
+    ["Chemicalling My Romance","My Chemical Romance"],
+    ["Escaping My Fate","Escape the Fate"],
+    ["Marching in the Black Parade","Welcome to the Black Parade"],
+    ["Making Damn Sure","MakeDamnSure"],
+    ["Bleeding American","Bleed American"],
+    ["Doing Misery Business","Misery Business"],
+    ["Chasing Safety","They're Only Chasing Safety"],
+    ["Cruising Ocean Avenue","Ocean Avenue"],
+    ["Piercing the Veil","Pierce the Veil"],
+    ["Setting Alexis on Fire","Alexisonfire"],
+    ["Sweating Out the Fever","A Fever You Can't Sweat Out"],
+    ["Loving in Ohio","Ohio Is for Lovers"]
+  ];
+  document.getElementById('setlist').innerHTML = setlist.map(
+    ([v,src]) => `<div class="verb"><span class="d">◍</span> ${v}…<small>${src}</small></div>`
+  ).join('');
+</script>
+</body>
+</html>

@@ -16,3 +16,8 @@ settings.json.bak.*
 
 # temp headless-Chrome render screenshots (keep the .html sources in assets/src)
 assets/src/_*.png
+
+# the global gitignore excludes any dir named "docs"; this repo's GitHub Pages
+# site lives there, so force it back in
+!docs/
+!docs/**
