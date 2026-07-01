@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EMO-Claude — turn Claude Code's spinner into an emo setlist</title>
-<meta name="description" content="Turn Claude Code's 'thinking' spinner into a mid-2000s emo setlist. Band names, song titles, and albums bent into gerunds — installed via the spinnerVerbs setting.">
+<title>EMO-Claude: turn Claude Code's spinner into an emo setlist</title>
+<meta name="description" content="Turn Claude Code's 'thinking' spinner into a mid-2000s emo setlist. Band names, song titles, and albums bent into gerunds, installed via the spinnerVerbs setting.">
 <meta name="theme-color" content="#0a0a0c">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%96%A4%3C/text%3E%3C/svg%3E">
 
@@ -149,14 +149,14 @@
       <path d="M250 6 q4 0 4 8 l0 3 q0 4 -4 4 q-4 0 -4 -4 l0 -3 q0 -8 4 -8z"/>
       <path d="M330 6 q5 0 5 11 l0 5 q0 4 -5 4 q-5 0 -5 -4 l0 -5 q0 -11 5 -11z"/>
     </svg>
-    <p class="lead">Turn Claude Code's "thinking" spinner into a mid-2000s <b>emo setlist</b>. Real band names, song titles, and albums — bent into gerunds.</p>
+    <p class="lead">Turn Claude Code's "thinking" spinner into a mid-2000s <b>emo setlist</b>. Real band names, song titles, and albums, all bent into gerunds.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#install">🖤 Install it</a>
       <a class="btn btn-ghost" href="https://github.com/russelleNVy/emo-claude">View on GitHub</a>
     </div>
 
     <div class="term" aria-hidden="true">
-      <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>claude — zsh</span></div>
+      <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>claude ~ zsh</span></div>
       <div class="term-body">
         <div class="prompt">$ claude</div>
         <div><span class="spin">◍</span> <span id="verb">Chemicalling My Romance</span>…<span class="cursor"></span></div>
@@ -167,19 +167,19 @@
 
 <section id="mascot" style="border-top:none">
   <div class="wrap">
-    <img class="mascot" src="assets/emo-claude-face.png" alt="The EMO-Claude mascot — an emo cyborg">
-    <p class="caption">your new spinner — feeling everything, shipping anyway.</p>
+    <img class="mascot" src="assets/emo-claude-face.png" alt="The EMO-Claude mascot, an emo cyborg">
+    <p class="caption">your new spinner, feeling everything, shipping anyway.</p>
   </div>
 </section>
 
 <section id="how">
   <div class="wrap">
     <h2>How it <span class="h">works</span></h2>
-    <p class="sub">No binary patching, no wrappers — just a supported key in your Claude Code settings.</p>
+    <p class="sub">No binary patching, no wrappers. Just a supported key in your Claude Code settings.</p>
     <div class="cards">
-      <div class="card"><h3><span class="ic">◆</span> One config key</h3><p>It's just <code>spinnerVerbs</code> in <code>~/.claude/settings.json</code>. Append to the defaults, or replace them entirely.</p></div>
-      <div class="card"><h3><span class="ic">◆</span> Survives updates</h3><p>It lives in your home-directory config, not the app — so a Claude Code update won't wipe it.</p></div>
-      <div class="card"><h3><span class="ic">◆</span> Terminal spinner</h3><p>The emo gerunds are Claude Code's terminal "thinking" spinner. Run <code>claude</code> in a real terminal to see them.</p></div>
+      <div class="card"><h3><span class="ic">♥</span> One config key</h3><p>It's just <code>spinnerVerbs</code> in <code>~/.claude/settings.json</code>. Append to the defaults, or replace them entirely.</p></div>
+      <div class="card"><h3><span class="ic">♥</span> Survives updates</h3><p>It lives in your home-directory config, not the app, so a Claude Code update won't wipe it.</p></div>
+      <div class="card"><h3><span class="ic">♥</span> Terminal spinner</h3><p>The emo gerunds are Claude Code's terminal "thinking" spinner. Run <code>claude</code> in a real terminal to see them.</p></div>
     </div>
     <pre><span class="c">// ~/.claude/settings.json</span>
 {
@@ -197,29 +197,29 @@
     <p class="sub">macOS &amp; Linux get a one-liner. Windows &amp; everyone else can edit the file directly.</p>
     <div class="cards" style="grid-template-columns:1fr">
       <div class="card">
-        <h3>Option A — one command <small style="color:var(--muted);font-weight:400">(macOS / Linux)</small></h3>
+        <h3>Option A: one command <small style="color:var(--muted);font-weight:400">(macOS / Linux)</small></h3>
 <pre>git clone https://github.com/russelleNVy/emo-claude.git
 cd emo-claude
 ./install.sh              <span class="c"># append to the defaults</span>
 ./install.sh --replace    <span class="c"># emo verbs only</span></pre>
       </div>
       <div class="card">
-        <h3>Option B — let Claude do it</h3>
+        <h3>Option B: let Claude do it</h3>
         <p>Paste into Claude Code: <em>"Add the verbs from <code>verbs.json</code> to my <code>~/.claude/settings.json</code> under <code>spinnerVerbs</code> with <code>mode: append</code>."</em></p>
       </div>
       <div class="card">
-        <h3>Option C — by hand <small style="color:var(--muted);font-weight:400">(any OS, incl. Windows)</small></h3>
+        <h3>Option C: by hand <small style="color:var(--muted);font-weight:400">(any OS, incl. Windows)</small></h3>
         <p>Copy the array from <a href="https://github.com/russelleNVy/emo-claude/blob/main/verbs.json">verbs.json</a> into your settings file: <code>~/.claude/settings.json</code> (macOS/Linux) or <code>%USERPROFILE%\.claude\settings.json</code> (Windows).</p>
       </div>
     </div>
-    <div class="note"><b>Where it works:</b> the Claude Code <b>terminal CLI</b> (macOS / Linux / Windows). It does <b>not</b> change the standalone Claude desktop app — that draws its own status UI and doesn't read <code>spinnerVerbs</code>.</div>
+    <div class="note"><b>Where it works:</b> the Claude Code <b>terminal CLI</b> (macOS / Linux / Windows). It does <b>not</b> change the standalone Claude desktop app, which draws its own status UI and doesn't read <code>spinnerVerbs</code>.</div>
   </div>
 </section>
 
 <section id="setlist">
   <div class="wrap">
     <h2>The <span class="h">setlist</span></h2>
-    <p class="sub">A taste — band names, song titles, and albums, all bent into gerunds. <a href="https://github.com/russelleNVy/emo-claude/blob/main/verbs.json">See the full list →</a></p>
+    <p class="sub">A taste of band names, song titles, and albums, all bent into gerunds. <a href="https://github.com/russelleNVy/emo-claude/blob/main/verbs.json">See the full list →</a></p>
     <div class="setlist" id="setlist"></div>
   </div>
 </section>
