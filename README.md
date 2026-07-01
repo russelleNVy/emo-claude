@@ -1,2 +1,125 @@
-# emo-claude
-🖤 Turn Claude Code's "thinking" spinner into a mid-2000s emo setlist. A growing collection of gerunds made from real band names, songs &amp; albums — MCR, Pierce the Veil, Underoath, Thrice &amp; more. One-command install via the supported spinnerVerbs config. Survives updates. Stay sad, ship code.
+# 🖤 EMO-Claude
+
+> Turn Claude Code's spinner into a mid-2000s emo/scene setlist.
+
+Instead of watching Claude *Frolicking…* or *Percolating…*, watch it
+**Chemicalling My Romance…**, **Marching in the Black Parade…**, or
+**Making Damn Sure…** while it works.
+
+Every verb is a real emo/scene/pop-punk **band name or song title** bent into a
+gerund. Escape the Fate → *Escaping My Fate*. My Chemical Romance →
+*Chemicalling My Romance*. "I Write Sins Not Tragedies" → *Writing Sins, Not
+Tragedies*.
+
+---
+
+## How it works
+
+Claude Code (v2.x) supports a first-class setting for custom spinner words. No
+binary patching, no wrappers — it's just a key in `~/.claude/settings.json`:
+
+```json
+{
+  "spinnerVerbs": {
+    "mode": "append",
+    "verbs": ["Chemicalling My Romance", "Escaping My Fate", "..."]
+  }
+}
+```
+
+- `"mode": "append"` — adds the emo verbs **on top of** Claude's built-in defaults.
+- `"mode": "replace"` — shows **only** the emo verbs.
+
+Because it lives in your home-directory config, it **survives Claude Code
+updates** — unlike anything that edits the app itself.
+
+---
+
+## Install
+
+### Option A — one command (recommended)
+
+```bash
+git clone https://github.com/russelleNVy/emo-claude.git
+cd emo-claude
+./install.sh              # append to the defaults
+# or
+./install.sh --replace   # emo verbs only
+```
+
+The installer backs up your existing `settings.json` first, then merges with
+`jq`. Restart Claude Code and start a task to see it.
+
+Uninstall any time:
+
+```bash
+./install.sh --uninstall
+```
+
+### Option B — let Claude do it
+
+Open Claude Code and paste:
+
+> Add the verbs from `verbs.json` in this repo to my `~/.claude/settings.json`
+> under `spinnerVerbs` with `"mode": "append"`.
+
+### Option C — by hand
+
+Copy the array from [`verbs.json`](./verbs.json) into the `spinnerVerbs.verbs`
+field shown above.
+
+---
+
+## The setlist
+
+A taste of what's in [`verbs.json`](./verbs.json):
+
+### Band names → gerunds
+| Band | Spinner reads… |
+|------|----------------|
+| My Chemical Romance | Chemicalling My Romance… |
+| Escape the Fate | Escaping My Fate… |
+| Pierce the Veil | Piercing the Veil… |
+| Bring Me the Horizon | Bringing the Horizon… |
+| Death Cab for Cutie | Cabbing for Cutie… |
+| Alexisonfire | Setting Alexis on Fire… |
+| The Devil Wears Prada | Wearing Prada… |
+| Dance Gavin Dance | Dancing, Gavin, Dancing… |
+| Cobra Starship | Starshipping the Cobra… |
+| Bullet for My Valentine | Loading a Bullet for My Valentine… |
+
+### Song titles → gerunds
+| Song | Spinner reads… |
+|------|----------------|
+| "Welcome to the Black Parade" | Marching in the Black Parade… |
+| "I Write Sins Not Tragedies" | Writing Sins, Not Tragedies… |
+| "Sugar, We're Goin Down" | Going Down Swinging… |
+| "MakeDamnSure" | Making Damn Sure… |
+| "Misery Business" | Doing Misery Business… |
+| "King for a Day" | Kinging for a Day… |
+| "Ohio Is for Lovers" | Loving in Ohio… |
+| "The Middle" | Finding the Middle… |
+| "This Ain't a Scene, It's an Arms Race" | Declaring This Ain't a Scene… |
+| "Light 'Em Up" | Lighting 'Em Up… |
+
+Full list: **[`verbs.json`](./verbs.json)** — a growing setlist.
+
+---
+
+## Contributing
+
+The emo genre is deep. PRs adding more bands/songs are welcome — one rule:
+**every entry must be a real band or song title, transformed into a gerund
+(`-ing`) phrase.** Keep it readable at spinner width; punchy beats obscure.
+
+---
+
+## Requirements
+
+- Claude Code v2.x (has the `spinnerVerbs` setting)
+- `jq` for the installer (`brew install jq`) — or use Option B/C
+
+## License
+
+MIT. Band and song titles belong to their respective artists; this is a fan
+tribute for a terminal spinner. Stay sad, ship code. 🖤
