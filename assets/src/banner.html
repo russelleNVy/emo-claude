@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Rock+Salt&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0c;
+    --crimson:#e10f1f;
+    --crimson-soft:#ff2e3e;
+    --pink:#ff2d78;
+    --ink:#f4f4f6;
+    --muted:#8a8a93;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* layered background: crimson glow + halftone dots + grain + vignette */
+  .bg{position:fixed;inset:0;z-index:0}
+  .glow{position:absolute;inset:0;
+    background:radial-gradient(60% 70% at 50% 42%, rgba(225,15,31,.22), rgba(225,15,31,0) 70%);}
+  .dots{position:absolute;inset:0;opacity:.05;
+    background-image:radial-gradient(rgba(255,255,255,.9) 1px, transparent 1.4px);
+    background-size:22px 22px;}
+  .vignette{position:absolute;inset:0;
+    background:radial-gradient(80% 90% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.85) 100%);}
+  .grain{position:absolute;inset:0;opacity:.06;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  /* torn-poster frame */
+  .frame{position:fixed;inset:3.2vmin;z-index:1;
+    border:1px solid rgba(225,15,31,.35);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);}
+  .corner{position:absolute;color:var(--crimson);font-size:3.4vmin;line-height:1;opacity:.85}
+  .corner.tl{top:-1.9vmin;left:-1.2vmin}
+  .corner.tr{top:-1.9vmin;right:-1.2vmin}
+  .corner.bl{bottom:-2.4vmin;left:-1.2vmin}
+  .corner.br{bottom:-2.4vmin;right:-1.2vmin}
+
+  .stack{position:relative;z-index:2;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:2.4vmin;padding:4vmin}
+
+  .kicker{
+    font-weight:700;letter-spacing:.42em;text-transform:uppercase;
+    font-size:1.9vmin;color:var(--crimson-soft);
+    display:flex;align-items:center;gap:1.4em;
+  }
+  .kicker::before,.kicker::after{content:"✦";color:var(--pink);letter-spacing:0}
+
+  .title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:19vmin;line-height:.82;letter-spacing:.02em;
+    display:flex;align-items:center;gap:.14em;
+    filter:drop-shadow(0 0 18px rgba(225,15,31,.35));
+  }
+  .title .emo{color:var(--ink)}
+  .title .claude{color:var(--crimson)}
+  .title .heart{font-size:11vmin;color:var(--crimson);filter:drop-shadow(0 0 10px rgba(225,15,31,.6));
+    transform:translateY(.6vmin)}
+
+  /* drip under the title */
+  .drip{width:56vmin;height:3.6vmin;margin-top:-1vmin}
+
+  .tag{font-size:2.5vmin;color:#d8d8dd;font-weight:600;max-width:80vmin}
+  .tag b{color:var(--pink);font-weight:700}
+
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:2vmin;font-weight:500;
+    color:#e7e7ea;background:rgba(255,255,255,.03);
+    border:1px solid rgba(225,15,31,.4);border-radius:999px;
+    padding:1.1vmin 2.4vmin;display:inline-flex;align-items:center;gap:1em;
+    box-shadow:0 0 24px rgba(225,15,31,.12) inset;
+  }
+  .chip .spin{color:var(--crimson-soft)}
+
+  .scrawl{font-family:'Rock Salt',cursive;font-size:1.9vmin;color:var(--pink);opacity:.9;
+    transform:rotate(-2deg)}
+</style>
+</head>
+<body>
+  <div class="bg">
+    <div class="glow"></div>
+    <div class="dots"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+  </div>
+
+  <div class="frame">
+    <span class="corner tl">✦</span><span class="corner tr">✦</span>
+    <span class="corner bl">✦</span><span class="corner br">✦</span>
+  </div>
+
+  <div class="stack">
+    <div class="kicker">Spinner Verb Pack for Claude Code</div>
+
+    <div class="title">
+      <span class="emo">EMO</span>
+      <span class="heart">♥</span>
+      <span class="claude">CLAUDE</span>
+    </div>
+
+    <svg class="drip" viewBox="0 0 560 36" preserveAspectRatio="none" fill="#e10f1f">
+      <rect x="0" y="0" width="560" height="9"/>
+      <path d="M60 9 q6 0 6 12 l0 8 q0 6 -6 6 q-6 0 -6 -6 l0 -8 q0 -12 6 -12z"/>
+      <path d="M210 9 q7 0 7 16 l0 11 q0 7 -7 7 q-7 0 -7 -7 l0 -11 q0 -16 7 -16z"/>
+      <path d="M360 9 q5 0 5 10 l0 5 q0 5 -5 5 q-5 0 -5 -5 l0 -5 q0 -10 5 -10z"/>
+      <path d="M480 9 q6 0 6 14 l0 9 q0 6 -6 6 q-6 0 -6 -6 l0 -9 q0 -14 6 -14z"/>
+    </svg>
+
+    <div class="tag">Turn Claude Code's spinner into a mid-2000s <b>emo setlist</b>.</div>
+
+    <div class="chip"><span class="spin">◍</span> Marching&nbsp;in&nbsp;the&nbsp;Black&nbsp;Parade…</div>
+
+    <div class="scrawl">stay sad · ship code</div>
+  </div>
+</body>
+</html>

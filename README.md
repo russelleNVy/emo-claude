@@ -1,15 +1,27 @@
-# 🖤 EMO-Claude
+<div align="center">
 
-> Turn Claude Code's spinner into a mid-2000s emo/scene setlist.
+<img src="assets/hero.png" alt="EMO-Claude — turn Claude Code's spinner into a mid-2000s emo setlist" width="100%">
+
+<br><br>
+
+**Turn Claude Code's spinner into a mid-2000s emo setlist.**
 
 Instead of watching Claude *Frolicking…* or *Percolating…*, watch it
 **Chemicalling My Romance…**, **Marching in the Black Parade…**, or
 **Making Damn Sure…** while it works.
 
-Every verb is a real emo/scene/pop-punk **band name or song title** bent into a
-gerund. Escape the Fate → *Escaping My Fate*. My Chemical Romance →
+[![License: MIT](https://img.shields.io/badge/license-MIT-e10f1f?style=flat-square)](LICENSE)
+&nbsp;![Claude Code](https://img.shields.io/badge/Claude_Code-v2.x-1a1a1a?style=flat-square)
+&nbsp;![stay sad · ship code](https://img.shields.io/badge/stay_sad-ship_code-ff2d78?style=flat-square)
+
+</div>
+
+---
+
+Every verb is a real emo/scene/pop-punk **band name, song title, or album** bent
+into a gerund. Escape the Fate → *Escaping My Fate*. My Chemical Romance →
 *Chemicalling My Romance*. "I Write Sins Not Tragedies" → *Writing Sins, Not
-Tragedies*.
+Tragedies*. *Bleed American* → *Bleeding American*.
 
 ---
 
@@ -70,9 +82,18 @@ field shown above.
 
 ---
 
+<div align="center">
+<img src="assets/emo-claude-face.png" alt="The EMO-Claude mascot — an emo cyborg" width="90%">
+<br>
+<sub><i>your new spinner — feeling everything, shipping anyway.</i></sub>
+</div>
+
+---
+
 ## The setlist
 
-A taste of what's in [`verbs.json`](./verbs.json):
+A taste of what's in [`verbs.json`](./verbs.json) — **band names, song titles,
+and album titles**, all bent into gerunds:
 
 ### Band names → gerunds
 | Band | Spinner reads… |
@@ -101,6 +122,16 @@ A taste of what's in [`verbs.json`](./verbs.json):
 | "The Middle" | Finding the Middle… |
 | "This Ain't a Scene, It's an Arms Race" | Declaring This Ain't a Scene… |
 | "Light 'Em Up" | Lighting 'Em Up… |
+
+### Album titles → gerunds
+| Album | Spinner reads… |
+|-------|----------------|
+| *Bleed American* (Jimmy Eat World) | Bleeding American… |
+| *A Fever You Can't Sweat Out* (Panic!) | Sweating Out the Fever… |
+| *Brand New Eyes* (Paramore) | Opening Brand New Eyes… |
+| *They're Only Chasing Safety* (Underoath) | Chasing Safety… |
+| *Ocean Avenue* (Yellowcard) | Cruising Ocean Avenue… |
+| *Commit This to Memory* (Motion City Soundtrack) | Committing This to Memory… |
 
 Full list: **[`verbs.json`](./verbs.json)** — a growing setlist.
 

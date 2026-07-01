@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Rock+Salt&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0c;--crimson:#e10f1f;--crimson-soft:#ff2e3e;--pink:#ff2d78;--ink:#f4f4f6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+    overflow:hidden;-webkit-font-smoothing:antialiased}
+  .hero{position:relative;width:100%;height:100%}
+
+  /* mascot bleeds in from the right, dimmed so the words win */
+  .robot{position:absolute;right:0;top:0;height:100%;width:56%;
+    object-fit:cover;object-position:52% 26%;opacity:.82;z-index:0}
+
+  /* feather the LEFT edge of the mascot into pure black (no seam) + hold a dim veil over it */
+  .feather{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg,
+      #0a0a0c 0%, #0a0a0c 34%,
+      rgba(10,10,12,.86) 46%,
+      rgba(10,10,12,.55) 60%,
+      rgba(10,10,12,.6) 100%);}
+  /* overall darkening so the whole thing reads as a banner, text-forward */
+  .darken{position:absolute;inset:0;z-index:1;background:rgba(8,8,10,.32)}
+  .vignette{position:absolute;inset:0;z-index:1;
+    background:radial-gradient(95% 100% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.78) 100%);}
+  .scrim-b{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(0deg, rgba(6,6,8,.55) 0%, rgba(6,6,8,0) 24%);}
+  /* crimson glow pooled behind the centered title */
+  .glow{position:absolute;inset:0;z-index:1;
+    background:radial-gradient(42% 55% at 50% 46%, rgba(225,15,31,.26), rgba(225,15,31,0) 70%);}
+  /* soft dark halo directly behind the text for legibility over the face */
+  .halo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;
+    width:78%;height:78%;
+    background:radial-gradient(50% 50% at 50% 50%, rgba(6,6,8,.62), rgba(6,6,8,0) 72%);}
+  .dots{position:absolute;inset:0;z-index:1;opacity:.045;
+    background-image:radial-gradient(rgba(255,255,255,.9) 1px, transparent 1.4px);background-size:22px 22px;}
+
+  /* torn-poster frame */
+  .frame{position:absolute;inset:3vmin;z-index:3;border:1px solid rgba(225,15,31,.3)}
+  .corner{position:absolute;color:var(--crimson);font-size:3vmin;line-height:1;opacity:.85}
+  .corner.tl{top:-1.7vmin;left:-1vmin}.corner.tr{top:-1.7vmin;right:-1vmin}
+  .corner.bl{bottom:-2.1vmin;left:-1vmin}.corner.br{bottom:-2.1vmin;right:-1vmin}
+
+  /* wording: centered across the WHOLE banner */
+  .copy{position:absolute;inset:0;z-index:2;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;gap:2.4vmin;padding:5vmin}
+  .kicker{font-weight:700;letter-spacing:.36em;text-transform:uppercase;
+    font-size:1.9vmin;color:var(--crimson-soft);display:flex;align-items:center;gap:1.1em;
+    text-shadow:0 2px 14px rgba(0,0,0,.8)}
+  .kicker::before,.kicker::after{content:"✦";color:var(--pink);letter-spacing:0}
+
+  .title{font-family:'Bebas Neue',sans-serif;line-height:.8;letter-spacing:.02em;
+    filter:drop-shadow(0 4px 26px rgba(0,0,0,.7)) drop-shadow(0 0 22px rgba(225,15,31,.4));
+    display:flex;align-items:center;gap:.14em}
+  .title .emo{color:var(--ink)}
+  .title .word{font-size:20vmin}
+  .title .heart{color:var(--crimson);font-size:12vmin;
+    filter:drop-shadow(0 0 16px rgba(225,15,31,.7))}
+  .title .claude{color:var(--crimson)}
+
+  .drip{width:60vmin;height:3.4vmin;margin-top:-.6vmin;filter:drop-shadow(0 3px 10px rgba(0,0,0,.6))}
+  .tag{font-size:2.6vmin;color:#efeff2;font-weight:600;max-width:70vmin;
+    text-shadow:0 2px 16px rgba(0,0,0,.85)}
+  .tag b{color:var(--pink)}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:2vmin;font-weight:500;color:#f2f2f4;
+    background:rgba(0,0,0,.5);border:1px solid rgba(225,15,31,.5);border-radius:999px;
+    padding:1.1vmin 2.4vmin;display:inline-flex;align-items:center;gap:.9em;
+    box-shadow:0 0 26px rgba(225,15,31,.14) inset, 0 4px 20px rgba(0,0,0,.5)}
+  .chip .spin{color:var(--crimson-soft)}
+  .scrawl{font-family:'Rock Salt',cursive;font-size:1.8vmin;color:var(--pink);opacity:.92;
+    transform:rotate(-2deg);text-shadow:0 2px 12px rgba(0,0,0,.8)}
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="robot" src="../emo-claude-face.png" alt="">
+    <div class="feather"></div>
+    <div class="darken"></div>
+    <div class="scrim-b"></div>
+    <div class="vignette"></div>
+    <div class="glow"></div>
+    <div class="halo"></div>
+    <div class="dots"></div>
+
+    <div class="frame">
+      <span class="corner tl">✦</span><span class="corner tr">✦</span>
+      <span class="corner bl">✦</span><span class="corner br">✦</span>
+    </div>
+
+    <div class="copy">
+      <div class="kicker">Spinner Verb Pack for Claude Code</div>
+      <div class="title">
+        <span class="word emo">EMO</span>
+        <span class="heart">♥</span>
+        <span class="word claude">CLAUDE</span>
+      </div>
+      <svg class="drip" viewBox="0 0 600 34" preserveAspectRatio="none" fill="#e10f1f">
+        <rect x="0" y="0" width="600" height="8"/>
+        <path d="M80 8 q6 0 6 12 l0 8 q0 6 -6 6 q-6 0 -6 -6 l0 -8 q0 -12 6 -12z"/>
+        <path d="M230 8 q7 0 7 16 l0 10 q0 6 -7 6 q-7 0 -7 -6 l0 -10 q0 -16 7 -16z"/>
+        <path d="M380 8 q5 0 5 10 l0 5 q0 5 -5 5 q-5 0 -5 -5 l0 -5 q0 -10 5 -10z"/>
+        <path d="M510 8 q6 0 6 14 l0 9 q0 6 -6 6 q-6 0 -6 -6 l0 -9 q0 -14 6 -14z"/>
+      </svg>
+      <div class="tag">Turn Claude Code's spinner into a mid-2000s <b>emo setlist</b>.</div>
+      <div class="chip"><span class="spin">◍</span> Chemicalling&nbsp;My&nbsp;Romance…</div>
+      <div class="scrawl">stay sad · ship code</div>
+    </div>
+  </div>
+</body>
+</html>
